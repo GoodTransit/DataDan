@@ -1,0 +1,14 @@
+{
+  "agencies": [
+    {
+      "comment": "ny mta",
+      "url": "http://web.mta.info/developers/data/nyct/subway/google_transit.zip",
+      "exclude": []
+    }
+  ],
+  "csvOptions": {
+    "skip_lines_with_error": true
+  },
+  "sqlitePath": "config/ny/mta.db",
+  "exportPath": "./export-gtfs"
+}
