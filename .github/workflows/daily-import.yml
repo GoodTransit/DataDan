@@ -1,0 +1,38 @@
+name: Daily-GTFS-Import
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # runs at 12:00 UTC everyday
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.7' # install the node version needed
+          
+      - name: install node packages
+        run: |
+          npm install -g gtfs gtfs-realtime-bindings
+          
+      - name: execute node file # run node file
+        run: node index.js
+          
+      - name: commit files
+        run: |
+          git config --local user.email "action@goodtransit.app"
+          git config --local user.name "GoodTransit Actions"
+          git add -A
+          git commit -m "update data" -a
+          
+      - name: push updated data
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main  
