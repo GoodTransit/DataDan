@@ -33,8 +33,6 @@ exec(`gtfs-import --configPath ${__dirname}/config/ma/mbta.json`)
 		console.log(stderr);
 		console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
 		exec(`node config/ma/mbta.js`)
-		console.log(`• Formatting GTFS data for MTA in New York`)
-		exec(`node config/ny/mta.js`)
 	})
 	.catch(function(err) {
 		console.log('---------------------------------------------------------');
@@ -42,6 +40,22 @@ exec(`gtfs-import --configPath ${__dirname}/config/ma/mbta.json`)
 		console.log('---------------------------------------------------------');
 		console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
 		exec(`node config/ma/mbta.js`)
+	});
+
+console.log(`• Importing GTFS data for MTA in New York`)
+exec(`gtfs-import --configPath ${__dirname}/config/ny/mta.json`)
+	.then(function(result) {
+		var stdout = result.stdout;
+		var stderr = result.stderr;
+		console.log(stdout);
+		console.log(stderr);
+		console.log(`• Formatting GTFS data for MTA in New York`)
+		exec(`node config/ny/mta.js`)
+	})
+	.catch(function(err) {
+		console.log('---------------------------------------------------------');
+		console.error('ERROR: ', err);
+		console.log('---------------------------------------------------------');
 		console.log(`• Formatting GTFS data for MTA in New York`)
 		exec(`node config/ny/mta.js`)
 	});
