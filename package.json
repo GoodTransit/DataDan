@@ -1,0 +1,26 @@
+{
+  "name": "datadan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoodTransit/DataDan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoodTransit/DataDan/issues"
+  },
+  "homepage": "https://github.com/GoodTransit/DataDan#readme",
+  "dependencies": {
+    "child-process-promise": "^2.2.1",
+    "gtfs": "^3.3.1",
+    "gtfs-realtime-bindings": "^0.0.6",
+    "i": "^0.3.7",
+    "npm": "^8.9.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "agencies": [
+    {
+      "comment": "ma mbta",
+      "url": "https://cdn.mbta.com/MBTA_GTFS.zip",
+      "exclude": []
+    }
+  ],
+  "csvOptions": {
+    "skip_lines_with_error": true
+  },
+  "sqlitePath": "config/ma/mbta.db",
+  "exportPath": "./export-gtfs"
+}

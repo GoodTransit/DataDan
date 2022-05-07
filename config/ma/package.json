@@ -1,0 +1,5 @@
+{
+  "name": "mbta",
+  "main": "mbta.js",
+  "type": "module"
+}
