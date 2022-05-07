@@ -16,6 +16,7 @@ exec(`mkdir ${__dirname}/data/${today}`)
 		console.log(stdout);
 		console.log(stderr);
 		exec(`mkdir ${__dirname}/data/${today}/mbta`)
+		exec(`mkdir ${__dirname}/data/${today}/mta`)
 
 	})
 	.catch(function(err) {
