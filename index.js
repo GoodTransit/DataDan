@@ -24,97 +24,42 @@ exec(`mkdir ${__dirname}/data/${today}`)
 		console.log('---------------------------------------------------------');
 	});
 
-console.log(`• Installing node-gtfs through NPM`)
-console.info(`	npm install gtfs gtfs-realtime-bindings -g`)
-exec(`npm install -g gtfs gtfs-realtime-bindings`)
+console.log(`• Importing GTFS data for MBTA in Massachusetts`)
+exec(`gtfs-import --configPath ${__dirname}/config/ma/mbta.json`)
 	.then(function(result) {
 		var stdout = result.stdout;
 		var stderr = result.stderr;
 		console.log(stdout);
 		console.log(stderr);
-		console.log(`• Importing GTFS data for MBTA in Massachusetts`)
-		exec(`gtfs-import --configPath ${__dirname}/config/ma/mbta.json`)
+		console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
+		exec(`node config/ma/mbta.js`)
 			.then(function(result) {
 				var stdout = result.stdout;
 				var stderr = result.stderr;
 				console.log(stdout);
 				console.log(stderr);
-				console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
-				exec(`node config/ma/mbta.js`)
-					.then(function(result) {
-						var stdout = result.stdout;
-						var stderr = result.stderr;
-						console.log(stdout);
-						console.log(stderr);
-					})
-					.catch(function(err) {
-						console.log('---------------------------------------------------------');
-						console.error('ERROR: ', err);
-						console.log('---------------------------------------------------------');
-					});
 			})
 			.catch(function(err) {
 				console.log('---------------------------------------------------------');
 				console.error('ERROR: ', err);
 				console.log('---------------------------------------------------------');
-				console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
-				exec(`node config/ma/mbta.js`)
-					.then(function(result) {
-						var stdout = result.stdout;
-						var stderr = result.stderr;
-						console.log(stdout);
-						console.log(stderr);
-					})
-					.catch(function(err) {
-						console.log('---------------------------------------------------------');
-						console.error('ERROR: ', err);
-						console.log('---------------------------------------------------------');
-					});
 			});
-
 	})
 	.catch(function(err) {
 		console.log('---------------------------------------------------------');
 		console.error('ERROR: ', err);
 		console.log('---------------------------------------------------------');
-		console.log(`• Importing GTFS data for MBTA in Massachusetts`)
-		exec(`gtfs-import --configPath ${__dirname}/config/ma/mbta.json`)
+		console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
+		exec(`node config/ma/mbta.js`)
 			.then(function(result) {
 				var stdout = result.stdout;
 				var stderr = result.stderr;
 				console.log(stdout);
 				console.log(stderr);
-				console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
-				exec(`node config/ma/mbta.js`)
-					.then(function(result) {
-						var stdout = result.stdout;
-						var stderr = result.stderr;
-						console.log(stdout);
-						console.log(stderr);
-					})
-					.catch(function(err) {
-						console.log('---------------------------------------------------------');
-						console.error('ERROR: ', err);
-						console.log('---------------------------------------------------------');
-					});
 			})
 			.catch(function(err) {
 				console.log('---------------------------------------------------------');
 				console.error('ERROR: ', err);
 				console.log('---------------------------------------------------------');
-				console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
-				exec(`node config/ma/mbta.js`)
-					.then(function(result) {
-						var stdout = result.stdout;
-						var stderr = result.stderr;
-						console.log(stdout);
-						console.log(stderr);
-					})
-					.catch(function(err) {
-						console.log('---------------------------------------------------------');
-						console.error('ERROR: ', err);
-						console.log('---------------------------------------------------------');
-					});
 			});
-
 	});
