@@ -21,7 +21,9 @@ jobs:
 
       - name: install node packages
         run: |
-          npm install -g gtfs gtfs-realtime-bindings child-process-promise
+          npm install -g gtfs
+          npm install -g gtfs-realtime-bindings
+          npm install child-process-promise
 
       - name: execute node file # run node file
         run: node index.js
