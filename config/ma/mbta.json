@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b50fa9697c62218caf47d049d5d6712d26c0f698ca3d60fff0d877cd7e5410e2
-size 262
+{
+  "agencies": [
+    {
+      "comment": "ma mbta",
+      "url": "https://cdn.mbta.com/MBTA_GTFS.zip",
+      "exclude": []
+    }
+  ],
+  "csvOptions": {
+    "skip_lines_with_error": true
+  },
+  "sqlitePath": "config/ma/mbta.db",
+  "exportPath": "./export-gtfs"
+}
