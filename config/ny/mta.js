@@ -37,8 +37,8 @@ let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
 let year = date_ob.getFullYear();
 
 let today = year + "-" + month + "-" + date
-const service_date = year+month+date
-const weekday = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+const service_date = year + month + date
+const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 const d = new Date();
 let day = weekday[d.getDay()];
 
@@ -80,41 +80,53 @@ var i, j = 0
 // service ids in use TODAY only
 var validServiceIds = []
 
-for (i=0; i < calendars.length; i++) {
-	 if(calendars[i].start_date <= service_date && calendars[i].end_date >= service_date) {
-		 if (calendars[i][day] == 1) {
-			 validServiceIds.push(calendars[i].service_id)
-		 }
-	 }
+for (i = 0; i < calendars.length; i++) {
+	if (calendars[i].start_date <= service_date && calendars[i].end_date >= service_date) {
+		if (calendars[i][day] == 1) {
+			validServiceIds.push(calendars[i].service_id)
+		}
+	}
 }
 
 // turn `stops` array into object
-for (i=0; i < stops.length; i++) {
+for (i = 0; i < stops.length; i++) {
 	stops_object[stops[i].stop_id] = stops[i]
 }
 
-for(i=0; i < trips.length;i++) {
+for (i = 0; i < trips.length; i++) {
 	var newTripToAdd = trips[i]
 	var stop_times = await getStoptimes({
-    		trip_id: newTripToAdd.trip_id,
-  		}
-	)
+		trip_id: newTripToAdd.trip_id,
+	})
 	newTripToAdd.stop_times = stop_times
 	newTrips.push(newTripToAdd)
 }
 
-for(i=0; i < routes.length;i++) {
-	routesArray.push(routes[i].route_id)
+for (i = 0; i < routes.length; i++) {
+	routesArray.push({
+		id: i,
+		route_id: routes[i].route_id,
+		route_short_name: routes[i].route_id,
+		route_long_name: routes[i].route_long_name,
+		route_desc: routes[i].route_desc,
+		route_type: routes[i].route_type,
+		route_url: routes[i].route_url,
+		route_color: routes[i].route_color,
+		route_text_color: routes[i].route_text_color,
+		route_sort_order: routes[i].route_sort_order,
+		continuous_pickup: routes[i].continuous_pickup,
+		continuous_drop_off: routes[i].continuous_drop_off
+	})
 	var routeToAdd = routes[i]
 	routeToAdd.trips = []
 	newRoutes[routes[i].route_id] = routeToAdd
 }
 
-for(i=0; i < newTrips.length;i++) {
+for (i = 0; i < newTrips.length; i++) {
 	if (validServiceIds.includes(newTrips[i].service_id)) {
 		var tripToAdd = newTrips[i]
 
-		for(j=0;j<tripToAdd.stop_times.length;j++) {
+		for (j = 0; j < tripToAdd.stop_times.length; j++) {
 			tripToAdd.stop_times[j].stop_lat = stops_object[tripToAdd.stop_times[j].stop_id].stop_lat
 			tripToAdd.stop_times[j].stop_lon = stops_object[tripToAdd.stop_times[j].stop_id].stop_lon
 		}
@@ -123,7 +135,7 @@ for(i=0; i < newTrips.length;i++) {
 	}
 }
 
-for(i=0; i < routes.length;i++) {
+for (i = 0; i < routes.length; i++) {
 	writeFile(`./data/${today}/mta/routes/${routes[i].route_id}.json`, JSON.stringify(newRoutes[routes[i].route_id]))
 }
 writeFile(`./data/${today}/mta/routes.json`, JSON.stringify(routesArray))
