@@ -116,7 +116,6 @@ writeFile(`./data/${today}/mbta/valid_service_ids.json`, JSON.stringify(validSer
 writeFile(`./data/${today}/mbta/stops.json`, JSON.stringify(stops))
 // writeFile(`./data/${today}/mbta/stop_times.json`, JSON.stringify(stop_times))
 // writeFile(`./data/${today}/mbta/trips.json`, JSON.stringify(trips))
-writeFile(`./data/${today}/mbta/trips.json`, JSON.stringify(trips))
 writeFile(`./data/${today}/mbta/shapes.json`, JSON.stringify(shapes))
 writeFile(`./data/${today}/mbta/directions.json`, JSON.stringify(directions))
 writeFile(`./data/${today}/mbta/pathways.json`, JSON.stringify(pathways))
