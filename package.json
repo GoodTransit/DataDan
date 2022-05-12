@@ -1,26 +1,3 @@
-{
-  "name": "datadan",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GoodTransit/DataDan.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GoodTransit/DataDan/issues"
-  },
-  "homepage": "https://github.com/GoodTransit/DataDan#readme",
-  "dependencies": {
-    "child-process-promise": "^2.2.1",
-    "gtfs": "^3.3.1",
-    "gtfs-realtime-bindings": "^0.0.6",
-    "i": "^0.3.7",
-    "npm": "^8.9.0"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d9e1a99cea2efeafba69743b1873a088d35fc9c0a614b0afd5c9a0e2634d5691
+size 609
