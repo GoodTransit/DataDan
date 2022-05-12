@@ -32,8 +32,8 @@ exec(`gtfs-import --configPath ${__dirname}/config/ma/mbta.json`, {maxBuffer: 10
 	.then(function(result) {
 		var stdout = result.stdout;
 		var stderr = result.stderr;
-		console.log(stdout);
-		console.log(stderr);
+		//console.log(stdout);
+		//console.log(stderr);
 		console.log(`• Formatting GTFS data for MBTA in Massachusetts`)
 		exec(`node config/ma/mbta.js`, {maxBuffer: 1024 * 2000})
 	})
@@ -50,8 +50,8 @@ exec(`gtfs-import --configPath ${__dirname}/config/ny/mta.json`, {maxBuffer: 102
 	.then(function(result) {
 		var stdout = result.stdout;
 		var stderr = result.stderr;
-		console.log(stdout);
-		console.log(stderr);
+		//console.log(stdout);
+		//console.log(stderr);
 		console.log(`• Formatting GTFS data for MTA in New York`)
 		exec(`node config/ny/mta.js`, {maxBuffer: 1024 * 2000})
 	})

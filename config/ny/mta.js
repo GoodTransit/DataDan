@@ -37,6 +37,10 @@ let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
 let year = date_ob.getFullYear();
 
 let today = year + "-" + month + "-" + date
+const service_date = year+month+date
+const weekday = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+const d = new Date();
+let day = weekday[d.getDay()];
 
 const config = JSON.parse(
 	await readFile(new URL('./mta.json',
@@ -67,9 +71,22 @@ const time_table_pages = await getTimetablePages();
 const time_table_notes = await getTimetableNotes();
 const time_table_notes_references = await getTimetableNotesReferences();
 
-var newTrips = {}
+var newTrips = []
 var newRoutes = {}
-var i = 0
+var i, j = 0
+
+// service ids in use TODAY only
+var validServiceIds = []
+
+for (i=0; i < calendars.length; i++) {
+	 if(calendars[i].start_date <= service_date && calendars[i].end_date >= service_date) {
+		 if (calendars[i][day] == 1) {
+			 validServiceIds.push(calendars[i].service_id)
+		 }
+	 }
+}
+
+console.log(validServiceIds)
 
 for(i=0; i < trips.length;i++) {
 	var newTripToAdd = trips[i]
@@ -78,7 +95,7 @@ for(i=0; i < trips.length;i++) {
   		}
 	)
 	newTripToAdd.stop_times = stop_times
-	newTrips[trips[i].trip_id] = newTripToAdd
+	newTrips.push(newTripToAdd)
 }
 
 for(i=0; i < routes.length;i++) {
@@ -87,14 +104,17 @@ for(i=0; i < routes.length;i++) {
 	newRoutes[routes[i].route_id] = routeToAdd
 }
 
-for(i=0; i < trips.length;i++) {
-	newRoutes[trips[i].route_id].trips.push(trips[i])
+for(i=0; i < newTrips.length;i++) {
+	if (validServiceIds.includes(newTrips[i].service_id)) {
+		newRoutes[newTrips[i].route_id].trips.push(newTrips[i])
+	}
 }
 
 for(i=0; i < routes.length;i++) {
 	writeFile(`./data/${today}/mta/routes/${routes[i].route_id}.json`, JSON.stringify(newRoutes[routes[i].route_id]))
 }
 writeFile(`./data/${today}/mta/routes.json`, JSON.stringify(routes))
+writeFile(`./data/${today}/mta/valid_service_ids.json`, JSON.stringify(validServiceIds))
 writeFile(`./data/${today}/mta/stops.json`, JSON.stringify(stops))
 // writeFile(`./data/${today}/mta/stop_times.json`, JSON.stringify(stop_times))
 // writeFile(`./data/${today}/mta/trips.json`, JSON.stringify(trips))
