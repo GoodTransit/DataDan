@@ -47,7 +47,7 @@ const db = await openDb(config);
 const routes = await getRoutes();
 const shapes = await getShapes();
 const stops = await getStops();
-const stop_times = await getStoptimes();
+// const stop_times = await getStoptimes();
 const directions = await getDirections();
 const trips = await getTrips();
 const pathways = await getPathways();
@@ -67,9 +67,37 @@ const time_table_pages = await getTimetablePages();
 const time_table_notes = await getTimetableNotes();
 const time_table_notes_references = await getTimetableNotesReferences();
 
+var newTrips = {}
+var newRoutes = {}
+var i = 0
+
+for(i=0; i < trips.length;i++) {
+	var newTripToAdd = trips[i]
+	var stop_times = await getStoptimes({
+    		trip_id: newTripToAdd.trip_id,
+  		}
+	)
+	newTripToAdd.stop_times = stop_times
+	newTrips[trips[i].trip_id] = newTripToAdd
+}
+
+for(i=0; i < routes.length;i++) {
+	var routeToAdd = routes[i]
+	routeToAdd.trips = []
+	newRoutes[routes[i].route_id] = routeToAdd
+}
+
+for(i=0; i < trips.length;i++) {
+	newRoutes[trips[i].route_id].trips.push(trips[i])
+}
+
+for(i=0; i < routes.length;i++) {
+	writeFile(`./data/${today}/mta/routes/${routes[i].route_id}.json`, JSON.stringify(newRoutes[routes[i].route_id]))
+}
 writeFile(`./data/${today}/mbta/routes.json`, JSON.stringify(routes))
 writeFile(`./data/${today}/mbta/stops.json`, JSON.stringify(stops))
-writeFile(`./data/${today}/mbta/stop_times.json`, JSON.stringify(stop_times))
+// writeFile(`./data/${today}/mbta/stop_times.json`, JSON.stringify(stop_times))
+// writeFile(`./data/${today}/mbta/trips.json`, JSON.stringify(trips))
 writeFile(`./data/${today}/mbta/trips.json`, JSON.stringify(trips))
 writeFile(`./data/${today}/mbta/shapes.json`, JSON.stringify(shapes))
 writeFile(`./data/${today}/mbta/directions.json`, JSON.stringify(directions))

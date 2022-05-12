@@ -16,7 +16,9 @@ exec(`mkdir ${__dirname}/data/${today}`, {maxBuffer: 1024 * 2000})
 		console.log(stdout);
 		console.log(stderr);
 		exec(`mkdir ${__dirname}/data/${today}/mbta`, {maxBuffer: 1024 * 2000})
+		exec(`mkdir ${__dirname}/data/${today}/mbta/routes`, {maxBuffer: 1024 * 2000})
 		exec(`mkdir ${__dirname}/data/${today}/mta`, {maxBuffer: 1024 * 2000})
+		exec(`mkdir ${__dirname}/data/${today}/mta/routes`, {maxBuffer: 1024 * 2000})
 
 	})
 	.catch(function(err) {
