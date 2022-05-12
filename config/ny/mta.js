@@ -73,6 +73,8 @@ const time_table_notes_references = await getTimetableNotesReferences();
 
 var newTrips = []
 var newRoutes = {}
+var stops_object = {}
+var routesArray = []
 var i, j = 0
 
 // service ids in use TODAY only
@@ -86,7 +88,10 @@ for (i=0; i < calendars.length; i++) {
 	 }
 }
 
-console.log(validServiceIds)
+// turn `stops` array into object
+for (i=0; i < stops.length; i++) {
+	stops_object[stops[i].stop_id] = stops[i]
+}
 
 for(i=0; i < trips.length;i++) {
 	var newTripToAdd = trips[i]
@@ -99,6 +104,7 @@ for(i=0; i < trips.length;i++) {
 }
 
 for(i=0; i < routes.length;i++) {
+	routesArray.push(routes[i].route_id)
 	var routeToAdd = routes[i]
 	routeToAdd.trips = []
 	newRoutes[routes[i].route_id] = routeToAdd
@@ -113,9 +119,10 @@ for(i=0; i < newTrips.length;i++) {
 for(i=0; i < routes.length;i++) {
 	writeFile(`./data/${today}/mta/routes/${routes[i].route_id}.json`, JSON.stringify(newRoutes[routes[i].route_id]))
 }
-// writeFile(`./data/${today}/mta/routes.json`, JSON.stringify(routes))
+writeFile(`./data/${today}/mta/routes.json`, JSON.stringify(routesArray))
 writeFile(`./data/${today}/mta/valid_service_ids.json`, JSON.stringify(validServiceIds))
 writeFile(`./data/${today}/mta/stops.json`, JSON.stringify(stops))
+writeFile(`./data/${today}/mta/stops_object.json`, JSON.stringify(stops_object))
 // writeFile(`./data/${today}/mta/stop_times.json`, JSON.stringify(stop_times))
 // writeFile(`./data/${today}/mta/trips.json`, JSON.stringify(trips))
 writeFile(`./data/${today}/mta/shapes.json`, JSON.stringify(shapes))
