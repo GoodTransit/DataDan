@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:889cfd0f3228e5038bb9bc7d64bcf716fda094f73cbac8d551fc47646e23f19b
-size 60
+{
+  "name": "mta",
+  "main": "mta.js",
+  "type": "module"
+}
