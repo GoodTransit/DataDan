@@ -15,6 +15,7 @@ import {
 	getFareAttributes,
 	getFareRules,
 	getFeedInfo,
+	getStoptimes,
     getTranslations,
     getStopAttributes,
     getTimetables,
@@ -46,6 +47,7 @@ const db = await openDb(config);
 const routes = await getRoutes();
 const shapes = await getShapes();
 const stops = await getStops();
+const stop_times = await getStopstimes();
 const directions = await getDirections();
 const trips = await getTrips();
 const pathways = await getPathways();
@@ -67,6 +69,7 @@ const time_table_notes_references = await getTimetableNotesReferences();
 
 writeFile(`./data/${today}/mbta/routes.json`, JSON.stringify(routes))
 writeFile(`./data/${today}/mbta/stops.json`, JSON.stringify(stops))
+writeFile(`./data/${today}/mbta/stop_times.json`, JSON.stringify(stop_times))
 writeFile(`./data/${today}/mbta/trips.json`, JSON.stringify(trips))
 writeFile(`./data/${today}/mbta/shapes.json`, JSON.stringify(shapes))
 writeFile(`./data/${today}/mbta/directions.json`, JSON.stringify(directions))
