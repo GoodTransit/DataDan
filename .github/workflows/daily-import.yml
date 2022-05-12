@@ -34,6 +34,8 @@ jobs:
         run: |
           git config --local user.email "action@goodtransit.app"
           git config --local user.name "GoodTransit Actions"
+          git lfs install
+          git lfs track "*.json"
           git add .
           git commit -am "update data"
 
@@ -42,4 +44,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-          force: true
