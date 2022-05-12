@@ -111,7 +111,7 @@ for(i=0; i < newTrips.length;i++) {
 for(i=0; i < routes.length;i++) {
 	writeFile(`./data/${today}/mbta/routes/${routes[i].route_id}.json`, JSON.stringify(newRoutes[routes[i].route_id]))
 }
-writeFile(`./data/${today}/mbta/routes.json`, JSON.stringify(routes))
+// writeFile(`./data/${today}/mbta/routes.json`, JSON.stringify(routes))
 writeFile(`./data/${today}/mbta/valid_service_ids.json`, JSON.stringify(validServiceIds))
 writeFile(`./data/${today}/mbta/stops.json`, JSON.stringify(stops))
 // writeFile(`./data/${today}/mbta/stop_times.json`, JSON.stringify(stop_times))
