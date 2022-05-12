@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:10772bd161cffd3666f3e7364e8ab549eb1828aca45bd086cedf590174da8d90
-size 292
+{
+  "agencies": [
+    {
+      "comment": "ny mta",
+      "url": "http://web.mta.info/developers/data/nyct/subway/google_transit.zip",
+      "exclude": []
+    }
+  ],
+  "csvOptions": {
+    "skip_lines_with_error": true
+  },
+  "sqlitePath": "config/ny/mta.db",
+  "exportPath": "./export-gtfs"
+}
