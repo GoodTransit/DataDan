@@ -32,8 +32,8 @@ jobs:
         run: |
           git config --local user.email "action@goodtransit.app"
           git config --local user.name "GoodTransit Actions"
-          git add -A
-          git commit -m "update data" -a
+          git add .
+          git commit -am "update data"
 
       - name: push updated data
         uses: ad-m/github-push-action@v0.6.0
