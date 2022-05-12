@@ -4,6 +4,7 @@ import {
 	getRoutes,
 	getShapes,
 	getStops,
+	getStoptimes,
 	getDirections,
 	getTrips,
 	getPathways,
@@ -46,6 +47,7 @@ const db = await openDb(config);
 const routes = await getRoutes();
 const shapes = await getShapes();
 const stops = await getStops();
+const stop_times = await getStoptimes();
 const directions = await getDirections();
 const trips = await getTrips();
 const pathways = await getPathways();
@@ -67,6 +69,7 @@ const time_table_notes_references = await getTimetableNotesReferences();
 
 writeFile(`./data/${today}/mta/routes.json`, JSON.stringify(routes))
 writeFile(`./data/${today}/mta/stops.json`, JSON.stringify(stops))
+writeFile(`./data/${today}/mta/stop_times.json`, JSON.stringify(stop_times))
 writeFile(`./data/${today}/mta/trips.json`, JSON.stringify(trips))
 writeFile(`./data/${today}/mta/shapes.json`, JSON.stringify(shapes))
 writeFile(`./data/${today}/mta/directions.json`, JSON.stringify(directions))
