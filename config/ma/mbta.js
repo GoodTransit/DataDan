@@ -112,7 +112,12 @@ for(i=0; i < routes.length;i++) {
 
 for(i=0; i < newTrips.length;i++) {
 	if (validServiceIds.includes(newTrips[i].service_id)) {
-		newRoutes[newTrips[i].route_id].trips.push(newTrips[i])
+		var tripToAdd = newTrips[i]
+
+		tripToAdd.stop_lat = stops_object(tripToAdd.route_id).stop_lat
+		tripToAdd.stop_lon = stops_object(tripToAdd.route_id).stop_lon
+
+		newRoutes[newTrips[i].route_id].trips.push(tripToAdd)
 	}
 }
 
