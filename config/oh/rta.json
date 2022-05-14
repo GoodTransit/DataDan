@@ -1,0 +1,14 @@
+{
+  "agencies": [
+    {
+      "comment": "oh dayton rta",
+      "url": "http://proc.greaterdaytonrta.org/gtfs/google_transit.zip",
+      "exclude": []
+    }
+  ],
+  "csvOptions": {
+    "skip_lines_with_error": true
+  },
+  "sqlitePath": "config/oh/rta.db",
+  "exportPath": "./export-gtfs"
+}

@@ -19,6 +19,8 @@ exec(`mkdir ${__dirname}/data/${today}`, {maxBuffer: 1024 * 2000})
 		exec(`mkdir ${__dirname}/data/${today}/mbta/routes`, {maxBuffer: 1024 * 2000})
 		exec(`mkdir ${__dirname}/data/${today}/mta`, {maxBuffer: 1024 * 2000})
 		exec(`mkdir ${__dirname}/data/${today}/mta/routes`, {maxBuffer: 1024 * 2000})
+		exec(`mkdir ${__dirname}/data/${today}/rta`, {maxBuffer: 1024 * 2000})
+		exec(`mkdir ${__dirname}/data/${today}/rta/routes`, {maxBuffer: 1024 * 2000})
 
 	})
 	.catch(function(err) {
@@ -61,4 +63,22 @@ exec(`gtfs-import --configPath ${__dirname}/config/ny/mta.json`, {maxBuffer: 102
 		console.log('---------------------------------------------------------');
 		console.log(`• Formatting GTFS data for MTA in New York`)
 		exec(`node config/ny/mta.js`, {maxBuffer: 1024 * 2000})
+	});
+
+console.log(`• Importing GTFS data for RTA in Dayton, Ohio`)
+exec(`gtfs-import --configPath ${__dirname}/config/oh/rta.json`, {maxBuffer: 1024 * 2000})
+	.then(function(result) {
+		var stdout = result.stdout;
+		var stderr = result.stderr;
+		//console.log(stdout);
+		//console.log(stderr);
+		console.log(`• Formatting GTFS data for RTA in Dayton, Ohio`)
+		exec(`node config/oh/rta.js`, {maxBuffer: 1024 * 2000})
+	})
+	.catch(function(err) {
+		console.log('---------------------------------------------------------');
+		console.error('ERROR: ', err);
+		console.log('---------------------------------------------------------');
+		console.log(`• Formatting GTFS data for RTA in Dayton, Ohio`)
+		exec(`node config/oh/rta.js`, {maxBuffer: 1024 * 2000})
 	});
